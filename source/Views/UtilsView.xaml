@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewModels="clr-namespace:RevitPets.ViewModels"
     xmlns:gif="http://wpfanimatedgif.codeplex.com"
+    xmlns:converters="clr-namespace:RevitPets.Views.Converters"
     d:DataContext="{d:DesignInstance Type=viewModels:UtilsViewModel}"
     mc:Ignorable="d"
     Background="Transparent"
@@ -13,9 +14,28 @@
     Height="50"
     d:DesignWidth="320">
     
-    <Image Width="70" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center"
-           gif:ImageBehavior.AnimatedSource="pack://application:,,,/RevitPets;component/Resources/Animations/Anim399.gif" />
-    
+    <!-- Регистрируем конвертер в ресурсах StackPanel -->
+    <StackPanel.Resources>
+        <converters:WalkingStateConverter x:Key="WalkingStateConverter" />
+    </StackPanel.Resources>
+
+    <Image Width="70" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <!-- Привязываем AnimatedSource напрямую из ViewModel -->
+        <gif:ImageBehavior.AnimatedSource>
+            <Binding Path="AnimatedSource" />
+        </gif:ImageBehavior.AnimatedSource>
+
+        <!-- Привязка смещения изображения по оси X -->
+        <Image.RenderTransform>
+            <TranslateTransform X="{Binding XOffset}" />
+        </Image.RenderTransform>
+    </Image>
+
+    <Button Content="Toggle Walk"
+            Foreground="Black"
+            VerticalAlignment="Center"
+            Command="{Binding ToggleWalkingCommand}" />
+
     <Button
         Content="Remove Bar"
         Foreground="Black"

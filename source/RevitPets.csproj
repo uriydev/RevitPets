@@ -56,8 +56,8 @@
     <ItemGroup>
         <Resource Include="Resources\Icons\RibbonIcon16.png"/>
         <Resource Include="Resources\Icons\RibbonIcon32.png"/>
-        <None Remove="Resources\Animations\Animaion399.gif" />
         <Resource Include="Resources\Animations\Anim399.gif" />
+        <Resource Include="Resources\Animations\Anim193x200.gif" />
     </ItemGroup>
 
     <ItemGroup>
