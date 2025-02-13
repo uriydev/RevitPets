@@ -1,0 +1,11 @@
+﻿<RevitAddIns>
+    <AddIn Type="Application">
+        <Name>RevitPets</Name>
+        <Assembly>RevitPets/RevitPets.dll</Assembly>
+        <AddInId>70F2E48C-4D33-48CB-9801-F748872DDC42</AddInId>
+        <FullClassName>RevitPets.Application</FullClassName>
+        <VendorId>Development</VendorId>
+        <VendorDescription></VendorDescription>
+        <VendorEmail></VendorEmail>
+    </AddIn>
+</RevitAddIns>
