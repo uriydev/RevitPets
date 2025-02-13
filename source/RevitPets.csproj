@@ -50,16 +50,24 @@
         <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*"/>
         <PackageReference Include="Nice3point.Revit.Api.UIFramework" Version="$(RevitVersion).*-*"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.*"/>
-        <PackageReference Include="Xceed.Wpf.AvalonDock" version="4.*"/>
+        <PackageReference Include="WpfAnimatedGif" Version="2.*" />
     </ItemGroup>
 
     <ItemGroup>
         <Resource Include="Resources\Icons\RibbonIcon16.png"/>
         <Resource Include="Resources\Icons\RibbonIcon32.png"/>
+        <None Remove="Resources\Animations\Animaion399.gif" />
+        <Resource Include="Resources\Animations\Anim399.gif" />
     </ItemGroup>
 
     <ItemGroup>
         <Folder Include="Models"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Xceed.Wpf.AvalonDock">
+            <HintPath>..\..\..\..\..\Program Files\Autodesk\Revit 2024\Xceed.Wpf.AvalonDock.dll</HintPath>
+        </Reference>
     </ItemGroup>
 
 </Project>

@@ -3,14 +3,12 @@ using System.Windows.Controls;
 using System.Windows.Interop;
 using Autodesk.Windows;
 using Xceed.Wpf.AvalonDock.Controls;
-using Grid = System.Windows.Controls.Grid;
-using Visibility = System.Windows.Visibility;
 
 namespace RevitPets.Views.Utils;
 
 public static class RibbonController
 {
-    private static readonly Grid RootGrid;
+    private static readonly System.Windows.Controls.Grid RootGrid;
     private static ContentPresenter _panelPresenter;
     private static readonly FrameworkElement InternalToolPanel;
     
@@ -23,7 +21,7 @@ public static class RibbonController
         if (InternalToolPanel is null)
             throw new InvalidOperationException("Cannot find LayoutDocumentPaneGroupControl in Revit UI");
 
-        RootGrid = VisualUtils.FindVisualChild<Grid>(InternalToolPanel, string.Empty)
+        RootGrid = VisualUtils.FindVisualChild<System.Windows.Controls.Grid>(InternalToolPanel, string.Empty)
                    ?? throw new InvalidOperationException("Cannot find Grid inside LayoutDocumentPaneGroupControl");
     }
     
@@ -38,7 +36,7 @@ public static class RibbonController
         if (_panelPresenter is not null)
         {
             _panelPresenter.Content = content;
-            _panelPresenter.Visibility = Visibility.Visible;
+            _panelPresenter.Visibility = System.Windows.Visibility.Visible;
             return;
         }
 
@@ -59,7 +57,7 @@ public static class RibbonController
             bool isRowEmpty = true;
             foreach (UIElement child in RootGrid.Children)
             {
-                if (Grid.GetRow(child) == panelRow)
+                if (System.Windows.Controls.Grid.GetRow(child) == panelRow)
                 {
                     isRowEmpty = false;
                     break;
@@ -72,7 +70,7 @@ public static class RibbonController
             }
         }
     }
-
+    
     private static ContentPresenter CreateOptionsBar()
     {
         const int panelRow = 2;
@@ -86,7 +84,7 @@ public static class RibbonController
         }
 
         var panelPresenter = new ContentPresenter();
-        Grid.SetRow(panelPresenter, panelRow);
+        System.Windows.Controls.Grid.SetRow(panelPresenter, panelRow);
         RootGrid.Children.Add(panelPresenter);
 
         return panelPresenter;

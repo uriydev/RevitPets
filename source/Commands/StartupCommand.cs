@@ -2,6 +2,7 @@
 using Nice3point.Revit.Toolkit.External;
 using RevitPets.ViewModels;
 using RevitPets.Views;
+using RevitPets.Views.Utils;
 
 namespace RevitPets.Commands;
 
@@ -14,8 +15,8 @@ public class StartupCommand : ExternalCommand
 {
     public override void Execute()
     {
-        var viewModel = new RevitPetsViewModel();
-        var view = new RevitPetsView(viewModel);
-        view.Show(UiApplication.MainWindowHandle);
+        var viewModel = new UtilsViewModel();
+        var view = new UtilsView(viewModel);
+        RibbonController.ShowOptionsBar(view);
     }
 }

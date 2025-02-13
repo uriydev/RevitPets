@@ -1,0 +1,24 @@
+<StackPanel
+    x:Class="RevitPets.Views.UtilsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:viewModels="clr-namespace:RevitPets.ViewModels"
+    xmlns:gif="http://wpfanimatedgif.codeplex.com"
+    d:DataContext="{d:DesignInstance Type=viewModels:UtilsViewModel}"
+    mc:Ignorable="d"
+    Background="Transparent"
+    Orientation="Horizontal"
+    Height="50"
+    d:DesignWidth="320">
+    
+    <Image Width="70" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center"
+           gif:ImageBehavior.AnimatedSource="pack://application:,,,/RevitPets;component/Resources/Animations/Anim399.gif" />
+    
+    <Button
+        Content="Remove Bar"
+        Foreground="Black"
+        VerticalAlignment="Center"
+        Command="{Binding RemoveOptionsBarCommand}" />
+</StackPanel>
