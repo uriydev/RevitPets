@@ -12,14 +12,26 @@
     Background="Transparent"
     Orientation="Horizontal"
     Height="50"
-    d:DesignWidth="320">
+    Width="{Binding OptionsBarWidth, Mode=TwoWay}"
+    d:DesignWidth="1000">
     
     <!-- Регистрируем конвертер в ресурсах StackPanel -->
     <StackPanel.Resources>
         <converters:WalkingStateConverter x:Key="WalkingStateConverter" />
     </StackPanel.Resources>
+    
+    <!-- <Button Content="Toggle Walk" -->
+    <!--         Foreground="Black" -->
+    <!--         VerticalAlignment="Center" -->
+    <!--         Command="{Binding ToggleWalkingCommand}" /> -->
+    <!-- -->
+    <!-- <Button -->
+    <!--     Content="Remove Bar" -->
+    <!--     Foreground="Black" -->
+    <!--     VerticalAlignment="Center" -->
+    <!--     Command="{Binding RemoveOptionsBarCommand}" /> -->
 
-    <Image Width="70" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Image Width="50" Height="50" >
         <!-- Привязываем AnimatedSource напрямую из ViewModel -->
         <gif:ImageBehavior.AnimatedSource>
             <Binding Path="AnimatedSource" />
@@ -30,15 +42,5 @@
             <TranslateTransform X="{Binding XOffset}" />
         </Image.RenderTransform>
     </Image>
-
-    <Button Content="Toggle Walk"
-            Foreground="Black"
-            VerticalAlignment="Center"
-            Command="{Binding ToggleWalkingCommand}" />
-
-    <Button
-        Content="Remove Bar"
-        Foreground="Black"
-        VerticalAlignment="Center"
-        Command="{Binding RemoveOptionsBarCommand}" />
+    
 </StackPanel>
