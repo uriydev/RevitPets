@@ -1,11 +1,4 @@
-using System;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using Nice3point.Revit.Toolkit.External.Handlers;
 using RevitPets.Views.Utils;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 namespace RevitPets.ViewModels;
 
