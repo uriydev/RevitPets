@@ -20,16 +20,16 @@
         <converters:WalkingStateConverter x:Key="WalkingStateConverter" />
     </StackPanel.Resources>
     
-    <!-- <Button Content="Toggle Walk" -->
-    <!--         Foreground="Black" -->
-    <!--         VerticalAlignment="Center" -->
-    <!--         Command="{Binding ToggleWalkingCommand}" /> -->
-    <!-- -->
-    <!-- <Button -->
-    <!--     Content="Remove Bar" -->
-    <!--     Foreground="Black" -->
-    <!--     VerticalAlignment="Center" -->
-    <!--     Command="{Binding RemoveOptionsBarCommand}" /> -->
+    <Button Content="Toggle Walk"
+            Foreground="Black"
+            VerticalAlignment="Center"
+            Command="{Binding ToggleWalkingCommand}" />
+    
+    <Button
+        Content="Remove Bar"
+        Foreground="Black"
+        VerticalAlignment="Center"
+        Command="{Binding RemoveOptionsBarCommand}" />
 
     <Image Width="50" Height="50" >
         <!-- Привязываем AnimatedSource напрямую из ViewModel -->
