@@ -56,8 +56,9 @@
     <ItemGroup>
         <Resource Include="Resources\Icons\RibbonIcon16.png"/>
         <Resource Include="Resources\Icons\RibbonIcon32.png"/>
-        <Resource Include="Resources\Animations\Anim399.gif" />
-        <Resource Include="Resources\Animations\Anim193x200.gif" />
+        <Resource Include="Resources\Animations\RunRight.gif" />
+        <Resource Include="Resources\Animations\RunLeft.gif" />
+        <Resource Include="Resources\Animations\Idle.gif" />
     </ItemGroup>
 
     <ItemGroup>
