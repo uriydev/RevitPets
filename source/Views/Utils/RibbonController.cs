@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using Autodesk.Windows;
+using RevitPets.ViewModels;
 using Xceed.Wpf.AvalonDock.Controls;
 
 namespace RevitPets.Views.Utils;
@@ -23,6 +24,18 @@ public static class RibbonController
 
         RootGrid = VisualUtils.FindVisualChild<System.Windows.Controls.Grid>(InternalToolPanel, string.Empty)
                    ?? throw new InvalidOperationException("Cannot find Grid inside LayoutDocumentPaneGroupControl");
+    }
+    
+    public static void SubscribeToSizeChanged(UtilsViewModel viewModel)
+    {
+        if (_panelPresenter != null)
+        {
+            _panelPresenter.SizeChanged += (sender, e) =>
+            {
+                // Обновить ширину в ViewModel каждый раз, когда меняется ActualWidth
+                viewModel.PanelWidth = _panelPresenter.ActualWidth;
+            };
+        }
     }
     
     public static Window GetMainWindow()
@@ -86,7 +99,7 @@ public static class RibbonController
         var panelPresenter = new ContentPresenter();
         System.Windows.Controls.Grid.SetRow(panelPresenter, panelRow);
         RootGrid.Children.Add(panelPresenter);
-
+        
         return panelPresenter;
     }
 }
