@@ -9,7 +9,7 @@ namespace RevitPets.Views.Utils;
 public class RibbonController
 {
     private readonly System.Windows.Controls.Grid RootGrid;
-    private ContentPresenter _panelPresenter;
+    public ContentPresenter _panelPresenter;
     private readonly FrameworkElement InternalToolPanel;
     
     public RibbonController()

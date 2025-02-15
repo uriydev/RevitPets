@@ -25,5 +25,6 @@ public class Application : ExternalApplication
         
         pullButton.AddPushButton<StartupCommand>("Show");
         pullButton.AddPushButton<HideBarCommand>("Hide");
+        pullButton.AddPushButton<RestartWalkCommand>("RestartWalk");
     }
 }
