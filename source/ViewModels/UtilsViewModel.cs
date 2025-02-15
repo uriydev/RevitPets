@@ -1,6 +1,3 @@
-using RevitPets.Views;
-using RevitPets.Views.Utils;
-
 namespace RevitPets.ViewModels;
 
 public partial class UtilsViewModel : ObservableObject
@@ -33,7 +30,7 @@ public partial class UtilsViewModel : ObservableObject
     }
     
     [RelayCommand]
-    private void ToggleWalking()
+    public void ToggleWalking()
     {
         IsWalking = !IsWalking;
     

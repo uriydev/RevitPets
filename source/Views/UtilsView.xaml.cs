@@ -1,5 +1,3 @@
-using System.Windows;
-using Autodesk.Revit.UI;
 using RevitPets.ViewModels;
 
 namespace RevitPets.Views;

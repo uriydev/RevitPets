@@ -1,4 +1,5 @@
-﻿using Nice3point.Revit.Toolkit.External;
+﻿using Autodesk.Revit.UI;
+using Nice3point.Revit.Toolkit.External;
 using RevitPets.Commands;
 
 namespace RevitPets;
@@ -13,7 +14,8 @@ public class Application : ExternalApplication
     {
         Host.Start();
         
-        CreateRibbon();
+        // CreateRibbon();
+        CreatePanel(Application);
     }
 
     private void CreateRibbon()
@@ -23,5 +25,16 @@ public class Application : ExternalApplication
         panel.AddPushButton<StartupCommand>("Execute")
             .SetImage("/RevitPets;component/Resources/Icons/RibbonIcon16.png")
             .SetLargeImage("/RevitPets;component/Resources/Icons/RibbonIcon32.png");
+    }
+    
+    public static void CreatePanel(UIControlledApplication application)
+    {
+        var addinPanel = application.CreatePanel("Revit Pets");
+        var pullButton = addinPanel.AddPullDownButton("RevitPets", "RevitPets");
+        pullButton.SetImage("/RevitPets;component/Resources/Images/RibbonIcon16.png");
+        pullButton.SetLargeImage("/RevitPets;component/Resources/Images/RibbonIcon32.png");
+        
+        pullButton.AddPushButton<StartupCommand>("Show");
+        pullButton.AddPushButton<HideBarCommand>("Hide");
     }
 }

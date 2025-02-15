@@ -44,14 +44,7 @@
             <Button Content="Toggle Walk"
                     Foreground="Black"
                     VerticalAlignment="Center"
-                    Command="{Binding ToggleWalkingCommand}" />
-        </Grid>
-        
-        <Grid Grid.Row="3">
-            <Button Content="Toggle Bar"
-                    Foreground="Black"
-                    VerticalAlignment="Center"
-                    Command="{Binding ToggleOptionsBarCommand}" />
+                    Command="{Binding ToggleWalkingMainCommand}" />
         </Grid>
     </Grid>
 </Window>

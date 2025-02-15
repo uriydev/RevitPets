@@ -13,12 +13,12 @@ public static class Host
     {
         var services = new ServiceCollection();
         
-        services.AddTransient<UtilsView>();
-        services.AddTransient<UtilsViewModel>();
-        services.AddTransient<PetWindow>();
-        services.AddTransient<PetWindowViewModel>();
+        services.AddSingleton<UtilsView>();
+        services.AddSingleton<UtilsViewModel>();
+        services.AddSingleton<PetWindow>();
+        services.AddSingleton<PetWindowViewModel>();
         
-        services.AddTransient<RibbonController>();
+        services.AddSingleton<RibbonController>();
         
         _serviceProvider = services.BuildServiceProvider();
     }

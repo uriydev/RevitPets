@@ -19,7 +19,11 @@ public class StartupCommand : ExternalCommand
         // var view = new UtilsView(viewModel);
         // RibbonController.ShowOptionsBar(view);
 
-        var view = Host.GetService<PetWindow>();
-        view.Show();
+        // var view = Host.GetService<PetWindow>();
+        // view.Show();
+
+        var view = Host.GetService<UtilsView>();
+        var bar = Host.GetService<RibbonController>();
+        bar.ShowOptionsBar(view);
     }
 }
