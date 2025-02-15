@@ -1,12 +1,12 @@
 name: Workflow
 
-on:
-  push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
-      - '!main'
+#on:
+#  push:
+#    branches:
+#      - '**'
+#  pull_request:
+#    branches:
+#      - '!main'
 
 jobs:
   windows:
