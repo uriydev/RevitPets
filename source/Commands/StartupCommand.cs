@@ -15,8 +15,11 @@ public class StartupCommand : ExternalCommand
 {
     public override void Execute()
     {
-        var viewModel = new UtilsViewModel();
-        var view = new UtilsView(viewModel);
-        RibbonController.ShowOptionsBar(view);
+        // var viewModel = new UtilsViewModel();
+        // var view = new UtilsView(viewModel);
+        // RibbonController.ShowOptionsBar(view);
+
+        var view = Host.GetService<PetWindow>();
+        view.Show();
     }
 }

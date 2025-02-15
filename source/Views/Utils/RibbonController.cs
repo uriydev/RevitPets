@@ -7,13 +7,13 @@ using Xceed.Wpf.AvalonDock.Controls;
 
 namespace RevitPets.Views.Utils;
 
-public static class RibbonController
+public class RibbonController
 {
-    private static readonly System.Windows.Controls.Grid RootGrid;
-    private static ContentPresenter _panelPresenter;
-    private static readonly FrameworkElement InternalToolPanel;
+    private readonly System.Windows.Controls.Grid RootGrid;
+    private ContentPresenter _panelPresenter;
+    private readonly FrameworkElement InternalToolPanel;
     
-    static RibbonController()
+    public RibbonController()
     {
         var mainWindow = GetMainWindow();
         if (mainWindow is null) throw new InvalidOperationException("Revit main window not found");
@@ -26,25 +26,13 @@ public static class RibbonController
                    ?? throw new InvalidOperationException("Cannot find Grid inside LayoutDocumentPaneGroupControl");
     }
     
-    public static void SubscribeToSizeChanged(UtilsViewModel viewModel)
-    {
-        if (_panelPresenter != null)
-        {
-            _panelPresenter.SizeChanged += (sender, e) =>
-            {
-                // Обновить ширину в ViewModel каждый раз, когда меняется ActualWidth
-                viewModel.PanelWidth = _panelPresenter.ActualWidth;
-            };
-        }
-    }
-    
-    public static Window GetMainWindow()
+    public Window GetMainWindow()
     {
         var hwnd = ComponentManager.ApplicationWindow;
         return hwnd != IntPtr.Zero ? HwndSource.FromHwnd(hwnd)?.RootVisual as Window : null;
     }
     
-    public static void ShowOptionsBar(FrameworkElement content)
+    public void ShowOptionsBar(FrameworkElement content)
     {
         if (_panelPresenter is not null)
         {
@@ -57,7 +45,7 @@ public static class RibbonController
         _panelPresenter.Content = content;
     }
     
-    public static void RemoveOptionsBar()
+    public void RemoveOptionsBar()
     {
         if (_panelPresenter is null) return;
 
@@ -84,7 +72,7 @@ public static class RibbonController
         }
     }
     
-    private static ContentPresenter CreateOptionsBar()
+    private ContentPresenter CreateOptionsBar()
     {
         const int panelRow = 2;
 

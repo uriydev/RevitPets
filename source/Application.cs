@@ -11,6 +11,8 @@ public class Application : ExternalApplication
 {
     public override void OnStartup()
     {
+        Host.Start();
+        
         CreateRibbon();
     }
 
