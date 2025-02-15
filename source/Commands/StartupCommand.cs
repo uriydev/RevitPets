@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.Attributes;
+using Autodesk.Revit.UI;
 using Nice3point.Revit.Toolkit.External;
 using Nice3point.Revit.Toolkit.External.Handlers;
 using RevitPets.ViewModels;
@@ -24,16 +25,12 @@ public class StartupCommand : ExternalCommand
         var bar = Host.GetService<RibbonController>();
         bar.ShowOptionsBar(view);
         
-        var vm = Host.GetService<UtilsViewModel>();
-        // vm.RestartWalking();
+        //  Вызов другой команды
+        // RestartWalkCommand anotherCommand = new RestartWalkCommand();
+        // anotherCommand.Execute();
         
-        //
-        // Вызов через ActionEventHandler для выполнения в другом контексте
-        AsyncEventHandler.RaiseAsync(async application =>
-        {
-            // await vm.RestartWalking(); // Вызов асинхронного метода (плавно)
-            
-            // vm.RestartWalking(); // Вызов асинхронного метода (плавно)
-        });
+        // Запуск анимации кота
+        var viewModel = Host.GetService<UtilsViewModel>();
+        viewModel?.RestartWalking();
     }
 }
