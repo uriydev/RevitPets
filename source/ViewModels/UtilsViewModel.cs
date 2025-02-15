@@ -1,4 +1,3 @@
-using Autodesk.Revit.UI;
 using Nice3point.Revit.Toolkit.External.Handlers;
 using RevitPets.Views.Utils;
 
@@ -32,55 +31,6 @@ public partial class UtilsViewModel : ObservableObject
         XOffset = 0;
     }
     
-    
-    
-    
-    
-    // public async Task StartWalking()
-    // {
-    //     double barActualWidth = 0;
-    //
-    //     if (_ribbonController != null)
-    //     {
-    //         barActualWidth = _ribbonController.GetBarActualWidth();
-    //     }
-    //     else
-    //     {
-    //         barActualWidth = 0; // Значение по умолчанию, если _ribbonController == null
-    //     }
-    //     
-    //     AsyncEventHandler.RaiseAsync(async application =>
-    //     {
-    //         double direction = _random.Next(0, 2) == 0 ? 1 : -1;
-    //     
-    //         AnimatedSource = direction == 1 
-    //             ? "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif" 
-    //             : "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
-    //     
-    //         while (IsWalking)
-    //         {
-    //             XOffset += direction * walkSpeed;
-    //             
-    //             if (XOffset > barActualWidth)
-    //             {
-    //                 XOffset = barActualWidth;
-    //                 direction = -1;
-    //                 AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
-    //             }
-    //             else if (XOffset < 0)
-    //             {
-    //                 XOffset = 0;
-    //                 direction = 1;
-    //                 AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
-    //             }
-    //
-    //             await Task.Delay(10);
-    //         }
-    //
-    //         IsWalking = false;
-    //         AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
-    //     });
-    // }
     public async Task StartWalking()
     {
         // Используем асинхронное событие
@@ -123,10 +73,6 @@ public partial class UtilsViewModel : ObservableObject
             AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
         });
     }
-
-    
-    
-    
     
     public void RestartWalking()
     {

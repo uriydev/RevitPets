@@ -26,7 +26,7 @@ public class StartupCommand : ExternalCommand
         
         AsyncEventHandler.RaiseAsync(async application =>
         {
-            await Task.Delay(5000);
+            await Task.Delay(3000);
 
             var viewModel = Host.GetService<UtilsViewModel>();
             viewModel?.RestartWalking();
