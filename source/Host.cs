@@ -15,8 +15,6 @@ public static class Host
         
         services.AddSingleton<UtilsView>();
         services.AddSingleton<UtilsViewModel>();
-        services.AddSingleton<PetWindow>();
-        services.AddSingleton<PetWindowViewModel>();
         
         services.AddSingleton<RibbonController>();
         

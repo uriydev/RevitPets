@@ -2,7 +2,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using Autodesk.Windows;
-using RevitPets.ViewModels;
 using Xceed.Wpf.AvalonDock.Controls;
 
 namespace RevitPets.Views.Utils;
@@ -26,7 +25,7 @@ public class RibbonController
                    ?? throw new InvalidOperationException("Cannot find Grid inside LayoutDocumentPaneGroupControl");
     }
     
-    public Window GetMainWindow()
+    private Window GetMainWindow()
     {
         var hwnd = ComponentManager.ApplicationWindow;
         return hwnd != IntPtr.Zero ? HwndSource.FromHwnd(hwnd)?.RootVisual as Window : null;

@@ -11,10 +11,10 @@
     mc:Ignorable="d"
     Background="Transparent"
     Orientation="Horizontal"
-    Height="50"
+    Height="32"
     d:DesignWidth="1000">
     
-    <Image Width="50" Height="50" >
+    <Image>
         <!-- Привязываем AnimatedSource напрямую из ViewModel -->
         <gif:ImageBehavior.AnimatedSource>
             <Binding Path="AnimatedSource" />
