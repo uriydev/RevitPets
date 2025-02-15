@@ -9,7 +9,7 @@ namespace RevitPets.Views.Utils;
 public class RibbonController
 {
     private readonly System.Windows.Controls.Grid RootGrid;
-    public ContentPresenter _panelPresenter;
+    private ContentPresenter _panelPresenter;
     private readonly FrameworkElement InternalToolPanel;
     
     public RibbonController()
@@ -88,5 +88,10 @@ public class RibbonController
         RootGrid.Children.Add(panelPresenter);
         
         return panelPresenter;
+    }
+
+    public double GetBarActualWidth()
+    {
+        return _panelPresenter?.ActualWidth ?? 0;
     }
 }

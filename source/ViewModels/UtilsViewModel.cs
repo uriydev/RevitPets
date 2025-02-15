@@ -27,66 +27,112 @@ public partial class UtilsViewModel : ObservableObject
         _ribbonController = ribbonController;
         AsyncEventHandler = new AsyncEventHandler();
         
+        
         AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
         XOffset = 0;
     }
     
-    // public void StartWalking()
+    
+    
+    
+    
+    // public async Task StartWalking()
+    // {
+    //     double barActualWidth = 0;
+    //
+    //     if (_ribbonController != null)
+    //     {
+    //         barActualWidth = _ribbonController.GetBarActualWidth();
+    //     }
+    //     else
+    //     {
+    //         barActualWidth = 0; // Значение по умолчанию, если _ribbonController == null
+    //     }
+    //     
+    //     AsyncEventHandler.RaiseAsync(async application =>
+    //     {
+    //         double direction = _random.Next(0, 2) == 0 ? 1 : -1;
+    //     
+    //         AnimatedSource = direction == 1 
+    //             ? "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif" 
+    //             : "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
+    //     
+    //         while (IsWalking)
+    //         {
+    //             XOffset += direction * walkSpeed;
+    //             
+    //             if (XOffset > barActualWidth)
+    //             {
+    //                 XOffset = barActualWidth;
+    //                 direction = -1;
+    //                 AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
+    //             }
+    //             else if (XOffset < 0)
+    //             {
+    //                 XOffset = 0;
+    //                 direction = 1;
+    //                 AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
+    //             }
+    //
+    //             await Task.Delay(10);
+    //         }
+    //
+    //         IsWalking = false;
+    //         AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
+    //     });
+    // }
     public async Task StartWalking()
     {
-        AsyncEventHandler.RaiseAsync(async application =>
+        // Используем асинхронное событие
+        await AsyncEventHandler.RaiseAsync(async application =>
         {
-            // var stopTime = DateTime.Now.AddSeconds(5);
-            double direction = _random.Next(0, 2) == 0 ? 1 : -1; // Randomly choose left (1) or right (-1)
-        
-            // Set initial animation based on direction
-            AnimatedSource = direction == 1 
-                ? "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif" 
+            // Направление анимации
+            double direction = _random.Next(0, 2) == 0 ? 1 : -1;
+
+            // Устанавливаем начальную анимацию
+            AnimatedSource = direction == 1
+                ? "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif"
                 : "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
-        
-            // while (IsWalking && DateTime.Now < stopTime)
+
+            // Выполнение анимации при движении
             while (IsWalking)
             {
+                // Устанавливаем значение по умолчанию для barActualWidth
+                double barActualWidth = _ribbonController?.GetBarActualWidth() ?? 0;
+                
                 XOffset += direction * walkSpeed;
-    
-                // If the cat goes out of bounds, reverse direction
-                if (XOffset > _ribbonController._panelPresenter.ActualWidth)
+
+                if (XOffset > barActualWidth - 32)
                 {
-                    XOffset = _ribbonController._panelPresenter.ActualWidth; // Keep within bounds
-                    direction = -1; // Change direction to left
+                    XOffset = barActualWidth - 32;
+                    direction = -1;
                     AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
                 }
                 else if (XOffset < 0)
                 {
-                    XOffset = 0; // Keep within bounds
-                    direction = 1; // Change direction to right
+                    XOffset = 0;
+                    direction = 1;
                     AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
                 }
-    
-                await Task.Delay(10);
+
+                await Task.Delay(10); // Задержка для анимации
             }
-    
+
+            // Остановка анимации
             IsWalking = false;
-            AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif"; // Return to idle animation
+            AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
         });
     }
 
-    //(плавно)
-    // public async Task RestartWalking()
-    // {
-    //     AsyncEventHandler.RaiseAsync(application =>
-    //     {
-    //         IsWalking = true;
-    //         Task.Run(StartWalking);
-    //     });
-    // }
     
-    //(плавно)
+    
+    
+    
     public void RestartWalking()
     {
-        if (_ribbonController._panelPresenter is null)
+        if (_ribbonController is null)
         {
-            TaskDialog.Show("Error", "Panel is null!");
+            // TaskDialog.Show("Error", "Panel is null!");
             return;
         }
         
@@ -95,7 +141,5 @@ public partial class UtilsViewModel : ObservableObject
             IsWalking = true;
             Task.Run(StartWalking);
         });
-        // IsWalking = true;
-        // Task.Run(StartWalking);
     }
 }
