@@ -23,8 +23,7 @@ public class Application : ExternalApplication
         pullButton.SetImage("/RevitPets;component/Resources/Icons/RibbonIcon16.png");
         pullButton.SetLargeImage("/RevitPets;component/Resources/Icons/RibbonIcon32.png");
         
-        pullButton.AddPushButton<StartupCommand>("Show");
-        pullButton.AddPushButton<HideBarCommand>("Hide");
-        pullButton.AddPushButton<RestartWalkCommand>("RestartWalk");
+        pullButton.AddPushButton<StartupCommand>("Show Pet Bar");
+        pullButton.AddPushButton<HideBarCommand>("Delete Pet Bar");
     }
 }
