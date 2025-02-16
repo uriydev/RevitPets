@@ -8,21 +8,21 @@ namespace RevitPets.Views.Utils;
 
 public class RibbonController
 {
-    private readonly System.Windows.Controls.Grid RootGrid;
+    private readonly System.Windows.Controls.Grid _rootGrid;
+    private readonly FrameworkElement _internalToolPanel;
     private ContentPresenter _panelPresenter;
-    private readonly FrameworkElement InternalToolPanel;
     
     public RibbonController()
     {
         var mainWindow = GetMainWindow();
         if (mainWindow is null) throw new InvalidOperationException("Revit main window not found");
 
-        InternalToolPanel = VisualUtils.FindVisualChild<LayoutDocumentPaneGroupControl>(mainWindow, string.Empty);
-        if (InternalToolPanel is null)
+        _internalToolPanel = VisualUtils.FindVisualChild<LayoutDocumentPaneGroupControl>(mainWindow, string.Empty);
+        if (_internalToolPanel is null)
             throw new InvalidOperationException("Cannot find LayoutDocumentPaneGroupControl in Revit UI");
 
-        RootGrid = VisualUtils.FindVisualChild<System.Windows.Controls.Grid>(InternalToolPanel, string.Empty)
-                   ?? throw new InvalidOperationException("Cannot find Grid inside LayoutDocumentPaneGroupControl");
+        _rootGrid = VisualUtils.FindVisualChild<System.Windows.Controls.Grid>(_internalToolPanel, string.Empty)
+                    ?? throw new InvalidOperationException("Cannot find Grid inside LayoutDocumentPaneGroupControl");
     }
     
     private Window GetMainWindow()
@@ -52,14 +52,14 @@ public class RibbonController
         if (_panelPresenter is null) return;
         
         _panelPresenter.Content = null; // Очистка контента перед удалением
-        RootGrid.Children.Remove(_panelPresenter);
+        _rootGrid.Children.Remove(_panelPresenter);
         _panelPresenter = null;
 
         const int panelRow = 2;
-        if (RootGrid.RowDefinitions.Count > panelRow)
+        if (_rootGrid.RowDefinitions.Count > panelRow)
         {
             bool isRowEmpty = true;
-            foreach (UIElement child in RootGrid.Children)
+            foreach (UIElement child in _rootGrid.Children)
             {
                 if (System.Windows.Controls.Grid.GetRow(child) == panelRow)
                 {
@@ -70,7 +70,7 @@ public class RibbonController
 
             if (isRowEmpty)
             {
-                RootGrid.RowDefinitions.RemoveAt(panelRow);
+                _rootGrid.RowDefinitions.RemoveAt(panelRow);
             }
         }
     }
@@ -79,9 +79,9 @@ public class RibbonController
     {
         const int panelRow = 2;
 
-        if (RootGrid.RowDefinitions.Count <= panelRow)
+        if (_rootGrid.RowDefinitions.Count <= panelRow)
         {
-            RootGrid.RowDefinitions.Add(new RowDefinition
+            _rootGrid.RowDefinitions.Add(new RowDefinition
             {
                 Height = new GridLength(1, GridUnitType.Auto)
             });
@@ -89,7 +89,7 @@ public class RibbonController
 
         var panelPresenter = new ContentPresenter();
         System.Windows.Controls.Grid.SetRow(panelPresenter, panelRow);
-        RootGrid.Children.Add(panelPresenter);
+        _rootGrid.Children.Add(panelPresenter);
         
         return panelPresenter;
     }
