@@ -19,6 +19,8 @@ public class HideBarCommand : ExternalCommand
         var utilsViewModel = Host.GetService<UtilsViewModel>();
         utilsViewModel.StopActionForever();
         
+        Thread.Sleep(500);
+        
         ribbonController.RemoveOptionsBar();
     }
 }

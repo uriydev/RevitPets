@@ -28,6 +28,11 @@ public class StartupCommand : ExternalCommand
         {
             // await Task.Delay(3000);
             var utilsViewModel = Host.GetService<UtilsViewModel>();
+            
+            utilsViewModel?.StopActionForever();
+            
+            Thread.Sleep(500);
+            
             utilsViewModel?.StartActionLoop();
         });
     }
