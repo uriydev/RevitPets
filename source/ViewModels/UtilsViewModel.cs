@@ -24,7 +24,6 @@ public partial class UtilsViewModel : ObservableObject
     private readonly string _runRightAnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
     private readonly string _runLeftAnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
 
-    // Определяем возможные состояния питомца
     private enum PetState
     {
         Idle,
@@ -46,7 +45,9 @@ public partial class UtilsViewModel : ObservableObject
     public void StartActionLoop()
     {
         if (_currentState != PetState.Idle) return;
-
+        
+        XOffset = Math.Max(XOffset, 0);
+        
         _currentState = PetState.Walking;
         IsWalking = true;
 
@@ -56,9 +57,10 @@ public partial class UtilsViewModel : ObservableObject
     public void StopActionForever()
     {
         if (_currentState == PetState.Idle) return;
-
+        
         _currentState = PetState.Idle;
         IsWalking = false;
+        
         AnimatedSource = _idleAnimatedSource;
     }
 
