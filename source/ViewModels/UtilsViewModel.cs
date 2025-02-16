@@ -5,6 +5,10 @@ namespace RevitPets.ViewModels;
 
 public partial class UtilsViewModel : ObservableObject
 {
+    private const int ActionLoopDelay = 2000;
+    private const int FrameRate = 30;
+    private const int TotalDuration = 1000;
+    
     private readonly RibbonController _ribbonController;
     public AsyncEventHandler AsyncEventHandler { get; }
 
@@ -47,6 +51,7 @@ public partial class UtilsViewModel : ObservableObject
         if (_currentState != PetState.Idle) return;
         
         XOffset = Math.Max(XOffset, 0);
+        Console.WriteLine(XOffset);
         
         _currentState = PetState.Walking;
         IsWalking = true;
@@ -78,11 +83,9 @@ public partial class UtilsViewModel : ObservableObject
 
                     double direction = _random.Next(0, 2) == 0 ? 1 : -1;
                     AnimatedSource = direction == 1 ? _runRightAnimatedSource : _runLeftAnimatedSource;
-
-                    int frameRate = 30;
-                    int totalDuration = 1000;
-                    int frameDelay = 1000 / frameRate;
-                    int iterations = totalDuration / frameDelay;
+                    
+                    int frameDelay = 1000 / FrameRate;
+                    int iterations = TotalDuration / frameDelay;
 
                     for (int i = 0; i < iterations; i++)
                     {
@@ -119,7 +122,7 @@ public partial class UtilsViewModel : ObservableObject
                 // Обработка исключений при необходимости
             }
 
-            await Task.Delay(2000);
+            await Task.Delay(ActionLoopDelay);
         }
     }
 }
