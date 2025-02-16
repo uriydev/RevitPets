@@ -9,17 +9,20 @@ public partial class UtilsViewModel : ObservableObject
     public AsyncEventHandler AsyncEventHandler { get; }
 
     [ObservableProperty]
-    private bool isWalking;
+    private bool _isWalking;
 
     [ObservableProperty]
-    private string animatedSource;
+    private string _animatedSource;
 
     [ObservableProperty]
-    private double xOffset;
+    private double _xOffset;
 
     private readonly double _walkSpeed = 2;
     private readonly double _imageSize = 32;
     private readonly Random _random = new();
+    private readonly string _idleAnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
+    private readonly string _runRightAnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
+    private readonly string _runLeftAnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
 
     // Определяем возможные состояния питомца
     private enum PetState
@@ -36,7 +39,7 @@ public partial class UtilsViewModel : ObservableObject
         _ribbonController = ribbonController;
         AsyncEventHandler = new AsyncEventHandler();
 
-        AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
+        AnimatedSource = _idleAnimatedSource;
         XOffset = 0;
     }
 
@@ -46,7 +49,6 @@ public partial class UtilsViewModel : ObservableObject
 
         _currentState = PetState.Walking;
         IsWalking = true;
-        XOffset = 0;
 
         _ = PerformActionsAsync();
     }
@@ -57,8 +59,7 @@ public partial class UtilsViewModel : ObservableObject
 
         _currentState = PetState.Idle;
         IsWalking = false;
-        XOffset = 0;
-        AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
+        AnimatedSource = _idleAnimatedSource;
     }
 
     private async Task PerformActionsAsync()
@@ -74,9 +75,7 @@ public partial class UtilsViewModel : ObservableObject
                     _currentState = PetState.PerformingAction;
 
                     double direction = _random.Next(0, 2) == 0 ? 1 : -1;
-                    AnimatedSource = direction == 1
-                        ? "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif"
-                        : "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
+                    AnimatedSource = direction == 1 ? _runRightAnimatedSource : _runLeftAnimatedSource;
 
                     int frameRate = 30;
                     int totalDuration = 1000;
@@ -97,19 +96,19 @@ public partial class UtilsViewModel : ObservableObject
                         {
                             XOffset = barActualWidth - _imageSize;
                             direction = -1;
-                            AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
+                            AnimatedSource = _runLeftAnimatedSource;
                         }
                         else if (XOffset < 0)
                         {
                             XOffset = 0;
                             direction = 1;
-                            AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
+                            AnimatedSource = _runRightAnimatedSource;
                         }
 
                         await Task.Delay(frameDelay);
                     }
 
-                    AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
+                    AnimatedSource = _idleAnimatedSource;
                     _currentState = PetState.Walking;
                 });
             }
