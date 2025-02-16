@@ -22,7 +22,7 @@ public class RestartWalkCommand : ExternalCommand
         
         AsyncEventHandler.RaiseAsync(async application =>
         {
-            vm.RestartWalking();
+            // vm.RestartWalking();
         });
     }
 }

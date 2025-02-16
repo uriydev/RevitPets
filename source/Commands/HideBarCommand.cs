@@ -1,5 +1,6 @@
 using Autodesk.Revit.Attributes;
 using Nice3point.Revit.Toolkit.External;
+using RevitPets.ViewModels;
 using RevitPets.Views.Utils;
 
 namespace RevitPets.Commands;
@@ -14,6 +15,10 @@ public class HideBarCommand : ExternalCommand
     public override void Execute()
     {
         var bar = Host.GetService<RibbonController>();
+
+        var vm = Host.GetService<UtilsViewModel>();
+        vm.StopActionForever();
+        
         bar.RemoveOptionsBar();
     }
 }

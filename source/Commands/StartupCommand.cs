@@ -29,7 +29,7 @@ public class StartupCommand : ExternalCommand
             await Task.Delay(3000);
 
             var viewModel = Host.GetService<UtilsViewModel>();
-            viewModel?.RestartWalking();
+            viewModel?.StartActionLoop();
         });
     }
 }
