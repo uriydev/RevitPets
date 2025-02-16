@@ -36,7 +36,10 @@ public class RibbonController
         if (_panelPresenter is not null)
         {
             _panelPresenter.Content = content;
-            _panelPresenter.Visibility = System.Windows.Visibility.Visible;
+            if (_panelPresenter.Visibility != System.Windows.Visibility.Visible)
+            {
+                _panelPresenter.Visibility = System.Windows.Visibility.Visible;
+            }
             return;
         }
 
@@ -47,7 +50,8 @@ public class RibbonController
     public void RemoveOptionsBar()
     {
         if (_panelPresenter is null) return;
-
+        
+        _panelPresenter.Content = null; // Очистка контента перед удалением
         RootGrid.Children.Remove(_panelPresenter);
         _panelPresenter = null;
 
