@@ -78,13 +78,20 @@ public partial class UtilsViewModel : ObservableObject
                         ? "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif"
                         : "pack://application:,,,/RevitPets;component/Resources/Animations/RunLeft.gif";
 
-                    double barActualWidth = _ribbonController?.GetBarActualWidth() ?? 0;
+                    int frameRate = 30;
+                    int totalDuration = 1000;
+                    int frameDelay = 1000 / frameRate;
+                    int iterations = totalDuration / frameDelay;
 
-                    for (int i = 0; i < 30; i++)
+                    for (int i = 0; i < iterations; i++)
                     {
-                        if (_currentState == PetState.Idle) break;
+                        // Проверяем, не изменилось ли состояние
+                        if (_currentState != PetState.PerformingAction) break;
 
                         XOffset += direction * _walkSpeed;
+
+                        // Логика смены направления при достижении границ
+                        double barActualWidth = _ribbonController?.GetBarActualWidth() ?? 0;
 
                         if (XOffset > barActualWidth - _imageSize)
                         {
@@ -99,7 +106,7 @@ public partial class UtilsViewModel : ObservableObject
                             AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/RunRight.gif";
                         }
 
-                        await Task.Delay(20);
+                        await Task.Delay(frameDelay);
                     }
 
                     AnimatedSource = "pack://application:,,,/RevitPets;component/Resources/Animations/Idle.gif";
