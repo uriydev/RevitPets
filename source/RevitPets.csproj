@@ -51,7 +51,6 @@
         <PackageReference Include="Nice3point.Revit.Api.UIFramework" Version="$(RevitVersion).*-*"/>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.*"/>
         <PackageReference Include="WpfAnimatedGif" Version="2.*" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.*"/>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     </ItemGroup>
 
