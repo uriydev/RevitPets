@@ -12,14 +12,16 @@ namespace RevitPets.Commands;
 [Transaction(TransactionMode.Manual)]
 public class HideBarCommand : ExternalCommand
 {
-    public override void Execute()
+    public override async void Execute()
     {
         var ribbonController = Host.GetService<RibbonController>();
-
-        var utilsViewModel = Host.GetService<UtilsViewModel>();
-        utilsViewModel.StopActionForever();
+        if (ribbonController == null) return;
         
-        Thread.Sleep(500);
+        var utilsViewModel = Host.GetService<UtilsViewModel>();
+        if (utilsViewModel == null) return;
+        
+        await Task.Run(() => utilsViewModel.StopActionForever());
+        await Task.Delay(500);
         
         ribbonController.RemoveOptionsBar();
     }

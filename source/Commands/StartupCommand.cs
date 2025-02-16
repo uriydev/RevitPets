@@ -1,6 +1,5 @@
 ﻿using Autodesk.Revit.Attributes;
 using Nice3point.Revit.Toolkit.External;
-using Nice3point.Revit.Toolkit.External.Handlers;
 using RevitPets.ViewModels;
 using RevitPets.Views;
 using RevitPets.Views.Utils;
@@ -14,26 +13,17 @@ namespace RevitPets.Commands;
 [Transaction(TransactionMode.Manual)]
 public class StartupCommand : ExternalCommand
 {
-    public AsyncEventHandler AsyncEventHandler { get; set; }
-
-    public override void Execute()
+    public override async void Execute()
     {
-        AsyncEventHandler = new AsyncEventHandler();
-        
         var ribbonController = Host.GetService<RibbonController>();
-        var utilsView = Host.GetService<UtilsView>();
-        ribbonController.ShowOptionsBar(utilsView);
-        
-        AsyncEventHandler.RaiseAsync(async application =>
-        {
-            // await Task.Delay(3000);
-            var utilsViewModel = Host.GetService<UtilsViewModel>();
-            
-            utilsViewModel?.StopActionForever();
-            
-            Thread.Sleep(500);
-            
-            utilsViewModel?.StartActionLoop();
-        });
+        var utilsViewModel = Host.GetService<UtilsViewModel>();
+
+        if (ribbonController == null || utilsViewModel == null) return;
+
+        await Task.Run(() => utilsViewModel.StopActionForever());
+        await Task.Delay(500);
+        await Task.Run(() => utilsViewModel.StartActionLoop());
+
+        ribbonController.ShowOptionsBar(Host.GetService<UtilsView>());
     }
 }
