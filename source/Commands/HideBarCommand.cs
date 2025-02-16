@@ -14,11 +14,11 @@ public class HideBarCommand : ExternalCommand
 {
     public override void Execute()
     {
-        var bar = Host.GetService<RibbonController>();
+        var ribbonController = Host.GetService<RibbonController>();
 
-        var vm = Host.GetService<UtilsViewModel>();
-        vm.StopActionForever();
+        var utilsViewModel = Host.GetService<UtilsViewModel>();
+        utilsViewModel.StopActionForever();
         
-        bar.RemoveOptionsBar();
+        ribbonController.RemoveOptionsBar();
     }
 }

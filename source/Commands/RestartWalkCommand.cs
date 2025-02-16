@@ -20,9 +20,9 @@ public class RestartWalkCommand : ExternalCommand
         
         var vm = Host.GetService<UtilsViewModel>();
         
-        AsyncEventHandler.RaiseAsync(async application =>
-        {
-            // vm.RestartWalking();
-        });
+        // AsyncEventHandler.RaiseAsync(async application =>
+        // {
+        //     vm.RestartWalking();
+        // });
     }
 }

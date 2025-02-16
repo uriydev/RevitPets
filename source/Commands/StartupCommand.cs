@@ -20,16 +20,15 @@ public class StartupCommand : ExternalCommand
     {
         AsyncEventHandler = new AsyncEventHandler();
         
-        var bar = Host.GetService<RibbonController>();
-        var view = Host.GetService<UtilsView>();
-        bar.ShowOptionsBar(view);
+        var ribbonController = Host.GetService<RibbonController>();
+        var utilsView = Host.GetService<UtilsView>();
+        ribbonController.ShowOptionsBar(utilsView);
         
         AsyncEventHandler.RaiseAsync(async application =>
         {
-            await Task.Delay(3000);
-
-            var viewModel = Host.GetService<UtilsViewModel>();
-            viewModel?.StartActionLoop();
+            // await Task.Delay(3000);
+            var utilsViewModel = Host.GetService<UtilsViewModel>();
+            utilsViewModel?.StartActionLoop();
         });
     }
 }
